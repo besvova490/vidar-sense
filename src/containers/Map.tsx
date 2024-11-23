@@ -73,7 +73,7 @@ const LAYERS_MAP: Record<string, ReactElement> = {
   ),
 };
 
-export const Map = () => {
+const Map = () => {
   const searchParams = useSearchParams();
   const view = searchParams.get("view") || "openstreetmap";
 
@@ -118,3 +118,5 @@ export const Map = () => {
     </div>
   );
 };
+
+export default Map;
