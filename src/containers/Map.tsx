@@ -7,6 +7,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 // components
 // import { ChangeMapLayerButton } from "@/components/ChangeMapLayerButton";
+import { MapControl } from "@/components/MapControl";
 import { MapLayerController } from "@/components/MapLayerController";
 
 // assets
@@ -47,7 +48,9 @@ export const Map = () => {
           center={position}
           zoom={zoom}
           style={{ height: "100%", width: "100%" }}
+          zoomControl={false}
         >
+          <MapControl />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
