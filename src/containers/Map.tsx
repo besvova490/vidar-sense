@@ -47,6 +47,12 @@ const LAYERS_MAP: Record<string, ReactElement> = {
       maxZoom={19}
     />
   ),
+  dark: (
+    <TileLayer
+      url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+      attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    />
+  ),
   topographic: (
     <TileLayer
       url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"

@@ -14,6 +14,7 @@ import {
 const mapOptions = [
   "OpenStreetMap",
   "Satellite",
+  "Dark",
   "OpenTopoMap",
   "Topographic",
   "Street",
