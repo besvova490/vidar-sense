@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+// import React, { useState } from "react";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 // components
-import { ChangeMapLayerButton } from "@/components/ChangeMapLayerButton";
+// import { ChangeMapLayerButton } from "@/components/ChangeMapLayerButton";
 import { MapLayerController } from "@/components/MapLayerController";
 
 // assets
@@ -33,15 +34,15 @@ L.Icon.Default.mergeOptions({
 });
 
 export const Map = () => {
-  const [mapType, setMapType] = useState<"default" | "satellite">("default");
+  // const [mapType, setMapType] = useState<"default" | "satellite">("default");
   const position: L.LatLngExpression = [47.56, 7.57];
   const zoom = 5;
 
   return (
     <div>
-      <ChangeMapLayerButton mapType={mapType} setMapType={setMapType} />
+      {/* <ChangeMapLayerButton mapType={mapType} setMapType={setMapType} /> */}
 
-      <div style={{ height: "500px", width: "100%" }}>
+      <div style={{ height: "calc(100dvh - 64px)", width: "100%" }}>
         <MapContainer
           center={position}
           zoom={zoom}
@@ -51,7 +52,7 @@ export const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <MapLayerController mapType={mapType} />
+          <MapLayerController mapType="satellite" />
           {MOCK_DATA.map((item) => (
             <Marker key={item.id} position={item.position}>
               <Popup>{item.popup}</Popup>
