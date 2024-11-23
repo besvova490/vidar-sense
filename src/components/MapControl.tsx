@@ -1,13 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useMap } from "react-leaflet";
-import { Plus, Minus, PushPin, Crosshair, MapPin } from "@phosphor-icons/react";
+import {
+  Plus,
+  Minus,
+  PushPin,
+  Crosshair,
+  MapPin,
+  PushPinSlash,
+} from "@phosphor-icons/react";
+
+// components
+import { ChangeMapView } from "./ChangeMapView";
 
 // elements
 import { Button } from "./ui/button";
 
 // helpers
-import { cn } from "@/lib/utils";
 import { toMgrs } from "@/lib/coordinates";
 
 // assets
@@ -49,21 +58,23 @@ export const MapControl = () => {
   };
 
   const handleFixMap = () => {
-    setIsFixed(!isFixed);
+    if (isFixed) {
+      map.dragging.enable();
+      map.touchZoom.enable();
+      map.doubleClickZoom.enable();
+      map.scrollWheelZoom.enable();
 
-    if (!isFixed) {
-      map.dragging.disable();
-      map.touchZoom.disable();
-      map.doubleClickZoom.disable();
-      map.scrollWheelZoom.disable();
+      setIsFixed(false);
 
       return;
     }
 
-    map.dragging.enable();
-    map.touchZoom.enable();
-    map.doubleClickZoom.enable();
-    map.scrollWheelZoom.enable();
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+
+    setIsFixed(true);
   };
 
   const handleMyLocation = () => {
@@ -93,15 +104,21 @@ export const MapControl = () => {
             variant="outline"
             size="icon"
             onClick={handleFixMap}
-            className={cn(buttonClassName, {
-              "bg-blue-100 border-blue-500": isFixed,
-            })}
+            className={buttonClassName}
           >
-            <PushPin
-              color="#343330"
-              style={{ height: 32, width: 32 }}
-              weight="regular"
-            />
+            {isFixed ? (
+              <PushPinSlash
+                color="#343330"
+                style={{ height: 32, width: 32 }}
+                weight="regular"
+              />
+            ) : (
+              <PushPin
+                color="#343330"
+                style={{ height: 32, width: 32 }}
+                weight="regular"
+              />
+            )}
           </Button>
 
           <Button
@@ -109,7 +126,6 @@ export const MapControl = () => {
             size="icon"
             onClick={handleMyLocation}
             className={buttonClassName}
-            disabled={isFixed}
           >
             <Crosshair
               color="#343330"
@@ -117,6 +133,8 @@ export const MapControl = () => {
               weight="regular"
             />
           </Button>
+
+          <ChangeMapView />
         </div>
         <div className="flex flex-col gap-8">
           <Button
@@ -124,7 +142,6 @@ export const MapControl = () => {
             size="icon"
             onClick={handleZoomIn}
             className={buttonClassName}
-            disabled={isFixed}
           >
             <Plus
               color="#343330"
@@ -138,7 +155,6 @@ export const MapControl = () => {
             size="icon"
             onClick={handleZoomOut}
             className={buttonClassName}
-            disabled={isFixed}
           >
             <Minus
               color="#343330"
