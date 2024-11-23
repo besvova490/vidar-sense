@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Changed from local font to Inter
-import { Header } from "@/components/Header/Header";
+import { Header } from "@/components/Header";
 import "./globals.css";
 
 const inter = Inter({
