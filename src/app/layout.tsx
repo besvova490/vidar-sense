@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Changed from local font to Inter
+import { Inter } from "next/font/google";
+
+// styles
 import "./globals.css";
 
 const inter = Inter({
@@ -30,9 +32,7 @@ export default function RootLayout({
         </header>
 
         {/* Main content */}
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
       </body>
     </html>
   );
