@@ -26,7 +26,7 @@ export const DEFAULT_EVENTS: IDetectedEvent[] = [
       lng: 30.845922,
     },
     confidence: 0.8365857601165771,
-    videoUrl: "",
+    videoUrl: "/videos/Screen Recording 2024-11-24 at 13.41.46.mp4",
   },
   {
     id: "07FRB-TA2939",

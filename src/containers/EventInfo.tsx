@@ -1,36 +1,59 @@
-import Image from "next/image";
 import { SearchCheck, ExternalLink, TriangleAlert } from 'lucide-react';
 import dayjs from 'dayjs';
+import get from 'lodash.get';
 
 // components
 import { Button } from "@/components/ui/button";
 import CopyWrapper from "@/components/CopyWrapper";
 import Timeline from "@/components/Timeline";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { IDetectedEvent } from "@/constants/event";
 
 
 const EVENT_MAIN_INFO = [
   { label: "Drone", value: "drone", },
-  { label: "Date identified", value: "dateIdentified" },
+  {
+    label: "Date identified",
+    value: "date",
+    render: (e: unknown) => {
+      const value = e as string;
+
+      return dayjs(value).format('DD.MM.YYYY HH:mm');
+    }
+  },
   {
     label: "Coordinates",
     value: "coordinates",
-    render: (value: string) => (
-      <div>
-        <CopyWrapper text={value}>
-          <span>{ value }</span>
-        </CopyWrapper>
-        <a className="text-xs text-[#697A8D] underline text-nowrap cursor-pointer">
-          Change coordinate system
-        </a>
-      </div>
-    )
+    render: (e: unknown) => {
+      const value = e as { lat: number, lng: number };
+
+      return (
+        <div>
+          <CopyWrapper text={`${value.lat}, ${value.lng}`}>
+            <span>{ `${value.lat}, ${value.lng}` }</span>
+          </CopyWrapper>
+          <a className="text-xs text-[#697A8D] underline text-nowrap cursor-pointer">
+            Change coordinate system
+          </a>
+        </div>
+      )
+    }
   },
-  { label: "Snapshot Timecode", value: "snapshotTimecode" },
+  {
+    label: "AI Confidence",
+    value: "confidence",
+    render: (e: unknown) => {
+      const value = e as number;
+
+      return `${Math.round(value * 10000) / 100}%`;
+    }
+  },
 ];
 
 
-function EventInfo() {
+function EventInfo({ event }: { event: IDetectedEvent }) {
+
+  console.log(event);
 
   const timelinePoints = [
     { time: dayjs().set('hour', 15).set('minute', 40), title: 'Point 1', description: 'Description 1', },
@@ -47,7 +70,7 @@ function EventInfo() {
             <li key={item.label} className="flex flex-col gap-1">
               <span className="text-sm text-[#697A8D]">{item.label}</span>
               <div className="text-base font-medium">
-                { item.render ? item.render(item.value) : item.value }
+                { item.render ? item.render(get(event, item.value)) : get(event, item.value) }
               </div>
             </li>
           ))
@@ -56,11 +79,11 @@ function EventInfo() {
       <div>
         <p className="text-xs text-[#697A8D]">Object Snapshot</p>
         <div className="relative rounded-lg overflow-hidden h-[200px]">
-          <Image
-            src="https://picsum.photos/300/200"
-            alt="object snapshot"
-            fill
-            className="object-cover"
+          <video
+            src={event.videoUrl}
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
           />
           <div className="absolute text-white cursor-pointer bottom-[10px] right-[10px] w-[32px] h-[32px] rounded-lg bg-black/50 flex items-center justify-center">
             <SearchCheck size={16}/>

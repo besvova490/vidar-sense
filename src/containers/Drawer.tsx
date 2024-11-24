@@ -41,7 +41,7 @@ const Drawer = ({
         <DrawerHeader handleCloseDrawer={handleCloseDrawer} event={event} />
 
         <DrawerBody>
-          <EventInfo />
+          <EventInfo event={event} />
         </DrawerBody>
 
         <DrawerFooter
