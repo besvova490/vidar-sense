@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Changed from local font to Inter
+import { Inter } from "next/font/google"; 
 import { Header } from "@/components/Header";
 import "./globals.css";
 
@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Map Application", // Updated title
-  description: "Interactive map application with satellite view", // Updated description
+  title: "Vidar Sense",
+  description: "System for Intelligence Data Collection and Processing",
 };
 
 export default function RootLayout({
