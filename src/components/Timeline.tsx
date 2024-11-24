@@ -37,8 +37,6 @@ const Timeline = ({
     const pointTime = dayjs(point.time);
     const pointIndex = timelineMinutes.findIndex((minute) => pointTime.isSame(dayjs(minute), 'minute'));
 
-    console.log(pointTime, pointIndex, timelineMinutes);
-
     return pointIndex;
   }
 
