@@ -11,6 +11,7 @@ import {
 } from "@phosphor-icons/react";
 
 // components
+import { LocationAutocomplete } from "./LocationAutocomplete";
 import { ChangeMapView } from "./ChangeMapView";
 
 // elements
@@ -100,6 +101,8 @@ export const MapControl = () => {
     <>
       <div className="absolute left-6 top-6 z-[1000] flex h-[90%] flex-col justify-between">
         <div className="flex flex-col gap-8">
+          <LocationAutocomplete />
+
           <Button
             variant="outline"
             size="icon"

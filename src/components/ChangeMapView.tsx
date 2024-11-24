@@ -12,13 +12,12 @@ import {
 } from "./ui/dropdown-menu";
 
 const mapOptions = [
-  "OpenStreetMap",
-  "Satellite",
-  "Dark",
-  "OpenTopoMap",
-  "Topographic",
-  "Street",
-  "Terrain",
+  { label: "Open Street Map", value: "openstreetmap" },
+  { label: "Satellite", value: "satellite" },
+  { label: "Dark", value: "dark" },
+  { label: "Open Topo Map", value: "opentopomap" },
+  { label: "Topographic", value: "topographic" },
+  { label: "Street", value: "street" },
 ] as const;
 
 export const ChangeMapView = () => {
@@ -27,9 +26,9 @@ export const ChangeMapView = () => {
 
   const view = searchParams.get("view");
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("view", option.toLowerCase());
+    params.set("view", value);
     router.push(`?${params.toString()}`);
   };
 
@@ -45,19 +44,20 @@ export const ChangeMapView = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
+        side="right"
+        align="start"
         className="w-[200px] z-[1001] -mr-3"
         sideOffset={5}
       >
         {mapOptions.map((option) => (
           <DropdownMenuItem
-            key={option}
+            key={option.value}
             className={`cursor-pointer ${
-              view === option.toLowerCase() ? "bg-accent" : ""
+              view === option.value ? "bg-accent" : ""
             }`}
-            onClick={() => handleSelect(option)}
+            onClick={() => handleSelect(option.value)}
           >
-            {option}
+            {option.label}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

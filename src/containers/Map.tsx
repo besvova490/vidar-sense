@@ -9,6 +9,9 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 // components
 import { MapControl } from "@/components/MapControl";
 
+// constants
+import { TEST_EVENT } from "@/constants/event";
+
 // assets
 import { MyLocation } from "@/assets/icons/MyLocation";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -17,6 +20,7 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 // styles
 import "leaflet/dist/leaflet.css";
+import { EventMarker } from "@/components/EventMarker";
 
 const KIYV_COORDINATES: L.LatLngExpression = [50.4501, 30.5234];
 
@@ -65,12 +69,6 @@ const LAYERS_MAP: Record<string, ReactElement> = {
       attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
     />
   ),
-  terrain: (
-    <TileLayer
-      url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}"
-      attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
-    />
-  ),
   opentopomap: (
     <TileLayer
       url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
@@ -112,13 +110,40 @@ const Map = () => {
         zoomControl={false}
       >
         <MapControl />
+
         {LAYERS_MAP[view]}
+
         {userLocation && (
           <Marker
             position={userLocation}
             icon={myLocationIcon}
             zIndexOffset={1000}
           />
+        )}
+
+        {[TEST_EVENT]?.map(
+          (event, index) => {
+            const location = Object.values(event.location)[0]; 
+
+            const eventIcon = new DivIcon({
+              className: "custom-marker",
+              html: renderToString(
+                <EventMarker status="pending" title="Tank" />
+              ),
+              iconSize: [130, 41],
+              iconAnchor: [65, 20],
+            });
+
+            return (
+              location.gps && (
+                <Marker
+                  key={index}
+                  icon={eventIcon}
+                  position={location.gps as L.LatLngExpression}
+                />
+              )
+            );
+          }
         )}
       </MapContainer>
     </div>
