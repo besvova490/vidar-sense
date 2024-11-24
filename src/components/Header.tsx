@@ -25,7 +25,7 @@ export const Header = () => {
           <span className="text-base cursor-pointer">
             <Logo />
           </span>
-          <div className="size-full flex items-center gap-6 justify-center">
+          <div className="hidden md:flex size-full items-center gap-6 justify-center">
             <Link
               href="/"
               className={`px-6 py-2 rounded-lg border-solid border-2 border-slate-800 gap-2 flex align-center ${
