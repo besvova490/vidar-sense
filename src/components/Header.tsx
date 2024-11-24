@@ -1,13 +1,15 @@
 "use client";
 
+import { Logo } from "@/assets/icons/Logo";
 import {
   Archive,
-  List,
   MapTrifold,
   Record,
   Warning,
 } from "@phosphor-icons/react";
 import Link from "next/link";
+
+// assets
 import { usePathname } from "next/navigation";
 
 export const Header = () => {
@@ -21,7 +23,7 @@ export const Header = () => {
       <div className="max-w-14xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center text-white">
           <span className="text-base cursor-pointer">
-            <List size={32} />
+            <Logo />
           </span>
           <div className="size-full flex items-center gap-6 justify-center">
             <Link

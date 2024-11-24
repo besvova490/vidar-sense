@@ -22,10 +22,24 @@ export const DEFAULT_EVENTS: IDetectedEvent[] = [
     drone: "DJI Mavic 3",
     date: new Date(),
     coordinates: {
-      lat: 50.51108,
-      lng: 30.7909,
+      lat: 50.535214,
+      lng: 30.845922,
     },
     confidence: 0.8365857601165771,
+    videoUrl: "",
+  },
+  {
+    id: "07FRB-TA2939",
+    title: "Convoy",
+    isAddedByAI: true,
+    isApproved: false,
+    drone: "Hikvision DS-FWD-IZS",
+    date: new Date(),
+    coordinates: {
+      lat: 52.28537,
+      lng: 32.639261,
+    },
+    confidence: 0.9265857601165771,
     videoUrl: "",
   },
 ];
