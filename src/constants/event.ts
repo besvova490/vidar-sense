@@ -15,7 +15,7 @@ export interface IDetectedEvent {
 
 export const DEFAULT_EVENTS: IDetectedEvent[] = [
   {
-    id: "1",
+    id: "15ARB-TA1931",
     title: "Tank Convoy",
     isAddedByAI: true,
     isApproved: false,
