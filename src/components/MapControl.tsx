@@ -99,7 +99,7 @@ export const MapControl = () => {
 
   return (
     <>
-      <div className="absolute left-6 top-6 z-[1000] flex h-[90%] flex-col justify-between">
+      <div className="absolute left-6 top-6 z-[1000] flex h-[80%] flex-col justify-between">
         <div className="flex flex-col gap-8">
           <LocationAutocomplete />
 
@@ -166,23 +166,23 @@ export const MapControl = () => {
             />
           </Button>
         </div>
-
-        <div
-          className="p-3 flex gap-3 rounded border border-gray-200 bg-white shadow-md"
-          onClick={handleCopyCoordinates}
-        >
-          <div className="flex items-center gap-1">
-            <MapPin className="h-4 w-4 text-gray-400" weight="regular" />
-            <div className="text-gray-400 text-base font-medium leading-6">
-              MGRS
-            </div>
-          </div>
-          <div className="text-2xl font-bold leading-6">{coordinates}</div>
-        </div>
       </div>
 
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[999]">
         <Cursor />
+      </div>
+
+      <div
+        className="fixed z-[1000] bottom-6 left-6 p-3 flex gap-3 rounded border border-gray-200 bg-white shadow-md"
+        onClick={handleCopyCoordinates}
+      >
+        <div className="flex items-center gap-1">
+          <MapPin className="h-4 w-4 text-gray-400" weight="regular" />
+          <div className="text-gray-400 text-base font-medium leading-6">
+            MGRS
+          </div>
+        </div>
+        <div className="text-2xl font-bold leading-6">{coordinates}</div>
       </div>
     </>
   );
