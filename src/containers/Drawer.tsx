@@ -24,14 +24,14 @@ const Drawer = ({
 }: IDrawerProps) => {
   return (
     <div
+      className="p-4 md:p-9"
       style={{
         position: "absolute",
         top: 0,
         right: 0,
         zIndex: 1001,
         height: "100%",
-        width: "472px",
-        padding: "36px",
+        width: "clamp(320px, 100%, 472px)",
       }}
     >
       <div
