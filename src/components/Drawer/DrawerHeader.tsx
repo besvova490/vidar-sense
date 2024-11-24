@@ -1,5 +1,13 @@
-import React from 'react'
+import React from "react";
 
-export const DrawerHeader = () => {
-  return <div className="p-6 border-b border-[#E9ECEF]">DrawerHeader</div>;
+interface IDrawerProps {
+  handleCloseDrawer: () => void;
 }
+
+export const DrawerHeader = ({ handleCloseDrawer }: IDrawerProps) => {
+  return (
+    <div className="p-6 border-b border-[#E9ECEF]" onClick={handleCloseDrawer}>
+      DrawerHeader
+    </div>
+  );
+};

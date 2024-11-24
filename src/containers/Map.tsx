@@ -8,9 +8,10 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 // components
 import { MapControl } from "@/components/MapControl";
+import { EventMarker } from "@/components/EventMarker";
 
 // constants
-import { TEST_EVENT } from "@/constants/event";
+import { IDetectedEvent } from "@/constants/event";
 
 // assets
 import { MyLocation } from "@/assets/icons/MyLocation";
@@ -20,9 +21,11 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 // styles
 import "leaflet/dist/leaflet.css";
-import { EventMarker } from "@/components/EventMarker";
 
-const KIYV_COORDINATES: L.LatLngExpression = [50.4501, 30.5234];
+interface IMapProps {
+  markers: IDetectedEvent[];
+  handleOpenDrawer: (id: string) => void;
+}
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -36,6 +39,8 @@ const myLocationIcon = new DivIcon({
   iconSize: [44, 44],
   iconAnchor: [22, 22],
 });
+
+const KIYV_COORDINATES: L.LatLngExpression = [50.4501, 30.5234];
 
 const LAYERS_MAP: Record<string, ReactElement> = {
   openstreetmap: (
@@ -77,7 +82,10 @@ const LAYERS_MAP: Record<string, ReactElement> = {
   ),
 };
 
-const Map = () => {
+const Map = ({
+  markers,
+  handleOpenDrawer,
+}: IMapProps) => {
   const searchParams = useSearchParams();
   const view = searchParams.get("view") || "openstreetmap";
 
@@ -121,30 +129,29 @@ const Map = () => {
           />
         )}
 
-        {[TEST_EVENT]?.map(
-          (event, index) => {
-            const location = Object.values(event.location)[0]; 
+        {markers?.map((event, index) => {
+          const eventIcon = new DivIcon({
+            className: "custom-marker",
+            html: renderToString(<EventMarker {...event} />),
+            iconSize: [130, 41],
+            iconAnchor: [65, 20],
+          });
 
-            const eventIcon = new DivIcon({
-              className: "custom-marker",
-              html: renderToString(
-                <EventMarker status="pending" title="Tank" />
-              ),
-              iconSize: [130, 41],
-              iconAnchor: [65, 20],
-            });
-
-            return (
-              location.gps && (
-                <Marker
-                  key={index}
-                  icon={eventIcon}
-                  position={location.gps as L.LatLngExpression}
-                />
-              )
-            );
-          }
-        )}
+          return (
+            event.coordinates && (
+              <Marker
+                eventHandlers={{
+                  click: () => {
+                    handleOpenDrawer(event.id);
+                  },
+                }}
+                key={index}
+                icon={eventIcon}
+                position={event.coordinates as unknown as L.LatLngExpression}
+              />
+            )
+          );
+        })}
       </MapContainer>
     </div>
   );
