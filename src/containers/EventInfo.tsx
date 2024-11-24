@@ -8,6 +8,7 @@ import CopyWrapper from "@/components/CopyWrapper";
 import Timeline from "@/components/Timeline";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { IDetectedEvent } from "@/constants/event";
+import { toMgrs } from '@/lib/coordinates';
 
 
 const EVENT_MAIN_INFO = [
@@ -27,14 +28,13 @@ const EVENT_MAIN_INFO = [
     render: (e: unknown) => {
       const value = e as { lat: number, lng: number };
 
+      const mgrs = toMgrs(value.lat, value.lng, 2);
+
       return (
         <div>
-          <CopyWrapper text={`${value.lat}, ${value.lng}`}>
-            <span>{ `${value.lat}, ${value.lng}` }</span>
+          <CopyWrapper text={mgrs}>
+            <span>{ mgrs }</span>
           </CopyWrapper>
-          <a className="text-xs text-[#697A8D] underline text-nowrap cursor-pointer">
-            Change coordinate system
-          </a>
         </div>
       )
     }
@@ -52,9 +52,6 @@ const EVENT_MAIN_INFO = [
 
 
 function EventInfo({ event }: { event: IDetectedEvent }) {
-
-  console.log(event);
-
   const timelinePoints = [
     { time: dayjs().set('hour', 15).set('minute', 40), title: 'Point 1', description: 'Description 1', },
     { time: dayjs().set('hour', 15).set('minute', 50), title: 'Point 11', description: 'Description 11', },
@@ -77,7 +74,7 @@ function EventInfo({ event }: { event: IDetectedEvent }) {
         }
       </ul>
       <div>
-        <p className="text-xs text-[#697A8D]">Object Snapshot</p>
+        <p className="text-xs text-[#697A8D]">Recording</p>
         <div className="relative rounded-lg overflow-hidden h-[200px]">
           <video
             src={event.videoUrl}
@@ -114,7 +111,7 @@ function EventInfo({ event }: { event: IDetectedEvent }) {
       <Alert variant="warning">
         <TriangleAlert size={16}/>
         <AlertDescription>
-          This object has been identified by VidarSense. Please review it to determine if it is a valid enemy target, and approve or delete it as necessary.
+          This object has been identified by VidarSense. Please review it to determine if it is a valid enemy target, and approve or delete it as necessary.
         </AlertDescription>
       </Alert>
     </div>

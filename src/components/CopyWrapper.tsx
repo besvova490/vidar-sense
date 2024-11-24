@@ -1,5 +1,5 @@
+import { Copy, Spinner } from "@phosphor-icons/react";
 import React, { useState } from "react";
-import { Copy, LoaderCircle } from "lucide-react";
 
 
 function CopyWrapper({ text, children }: { text: string, children: React.ReactNode }) {
@@ -7,20 +7,31 @@ function CopyWrapper({ text, children }: { text: string, children: React.ReactNo
 
   return (
     <div
-      className="flex items-center justify-between gap-4 w-full cursor-pointer"
+      className="flex items-center gap-2 w-full cursor-pointer"
       onClick={() => {
         setIsLoading(true);
 
-        navigator.clipboard.writeText(text)
-          .finally(() => setIsLoading(false));
+        navigator.clipboard.writeText(text).finally(() => setIsLoading(false));
       }}
     >
-      { children }
-      {
-        isLoading
-          ? <LoaderCircle className="h-5 w-5 text-accent animate-spin" data-testid="loader-circle"/>
-          : <Copy className="h-5 w-5 cursor-pointer text-slate-500" data-testid="copy-icon"/>
-      }
+      {children}
+      {isLoading ? (
+        <Spinner
+          className="cursor-pointer"
+          color="#64748B"
+          style={{ height: 16, width: 16 }}
+          weight="regular"
+          data-testid="loader-circle"
+        />
+      ) : (
+        <Copy
+          className="cursor-pointer"
+          color="#64748B"
+          style={{ height: 16, width: 16 }}
+          weight="regular"
+          data-testid="copy-icon"
+        />
+      )}
     </div>
   );
 }
