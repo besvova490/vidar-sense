@@ -7,6 +7,7 @@ import { DrawerHeader } from "@/components/Drawer/DrawerHeader";
 
 // constants
 import { IDetectedEvent } from "@/constants/event";
+import EventInfo from "@/containers/EventInfo";
 
 interface IDrawerProps {
   event: IDetectedEvent;
@@ -39,7 +40,9 @@ const Drawer = ({
       >
         <DrawerHeader handleCloseDrawer={handleCloseDrawer} />
 
-        <DrawerBody />
+        <DrawerBody>
+          <EventInfo />
+        </DrawerBody>
 
         <DrawerFooter
           event={event}
