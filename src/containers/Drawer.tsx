@@ -1,9 +1,26 @@
+import React from "react";
+
+// components
 import { DrawerBody } from "@/components/Drawer/DrawerBody";
 import { DrawerFooter } from "@/components/Drawer/DrawerFooter";
 import { DrawerHeader } from "@/components/Drawer/DrawerHeader";
-import React from "react";
 
-const Drawer = () => {
+// constants
+import { IDetectedEvent } from "@/constants/event";
+
+interface IDrawerProps {
+  event: IDetectedEvent;
+  handleCloseDrawer: () => void;
+  handleRemoveEvent: (id: string) => void;
+  handleConfirmEvent: (id: string) => void;
+}
+
+const Drawer = ({
+  event,
+  handleCloseDrawer,
+  handleRemoveEvent,
+  handleConfirmEvent,
+}: IDrawerProps) => {
   return (
     <div
       style={{
@@ -20,11 +37,16 @@ const Drawer = () => {
         className="bg-white h-full w-full border border-[#E9ECEF] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.35)] rounded-lg"
         style={{ display: "grid", gridTemplateRows: "112px 1fr 88px" }}
       >
-        <DrawerHeader />
+        <DrawerHeader handleCloseDrawer={handleCloseDrawer} />
 
         <DrawerBody />
 
-        <DrawerFooter />
+        <DrawerFooter
+          event={event}
+          handleCloseDrawer={handleCloseDrawer}
+          handleRemoveEvent={handleRemoveEvent}
+          handleConfirmEvent={handleConfirmEvent}
+        />
       </div>
     </div>
   );
