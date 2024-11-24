@@ -36,9 +36,9 @@ const Drawer = ({
     >
       <div
         className="bg-white h-full w-full border border-[#E9ECEF] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.35)] rounded-lg"
-        style={{ display: "grid", gridTemplateRows: "112px 1fr 88px" }}
+        style={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}
       >
-        <DrawerHeader handleCloseDrawer={handleCloseDrawer} />
+        <DrawerHeader handleCloseDrawer={handleCloseDrawer} event={event} />
 
         <DrawerBody>
           <EventInfo />
