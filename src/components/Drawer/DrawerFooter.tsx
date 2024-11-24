@@ -36,11 +36,11 @@ export const DrawerFooter = ({
   return (
     <div
       className={cn(
-        "p-6 flex items-center",
+        "p-6 flex flex-col md:flex-row items-center gap-4",
         event.isApproved ? "justify-center" : "justify-between"
       )}
     >
-      <Button variant="destructive" onClick={handleRemove}>
+      <Button variant="destructive" onClick={handleRemove} className="w-full">
         <Trash
           color="#FFFFFF"
           style={{ height: 16, width: 16, marginRight: 8 }}
@@ -49,7 +49,7 @@ export const DrawerFooter = ({
         Remove Mark
       </Button>
       {!event.isApproved && (
-        <Button onClick={handleConfirm}>Save & Approve Mark</Button>
+        <Button onClick={handleConfirm} className="w-full">Save & Approve Mark</Button>
       )}
     </div>
   );
