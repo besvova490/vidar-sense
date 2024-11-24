@@ -1,8 +1,4 @@
-"use client";
-
-import dynamic from "next/dynamic";
-
-const Map = dynamic(() => import("@/containers/Map"), { ssr: false });
+import Map from "@/containers/Map";
 
 export default function Home() {
   return <Map />;
