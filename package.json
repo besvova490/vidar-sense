@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "dayjs": "^1.11.13",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.460.0",
     "mgrs": "^2.0.0",
