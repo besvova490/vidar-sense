@@ -40,6 +40,6 @@ export const DEFAULT_EVENTS: IDetectedEvent[] = [
       lng: 32.639261,
     },
     confidence: 0.9265857601165771,
-    videoUrl: "",
+    videoUrl: "/videos/Screen Recording 2024-11-24 at 14.05.52.mp4",
   },
 ];
