@@ -4,7 +4,7 @@ export interface IDetectedEvent {
   isAddedByAI: boolean;
   isApproved: boolean;
   drone: string;
-  date: Date;
+  date: string;
   coordinates: {
     lat: number;
     lng: number;
@@ -19,8 +19,8 @@ export const DEFAULT_EVENTS: IDetectedEvent[] = [
     title: "Tank Convoy",
     isAddedByAI: true,
     isApproved: false,
-    drone: "DJI Mavic 3",
-    date: new Date(),
+    drone: "DJI Mavic 3 Pro",
+    date: "2022-03-09",
     coordinates: {
       lat: 50.535214,
       lng: 30.845922,
@@ -33,11 +33,11 @@ export const DEFAULT_EVENTS: IDetectedEvent[] = [
     title: "Convoy",
     isAddedByAI: true,
     isApproved: false,
-    drone: "Hikvision DS-FWD-IZS",
-    date: new Date(),
+    drone: "DJI Mavic 3 Mini",
+    date: "2022-01-09",
     coordinates: {
-      lat: 52.28537,
-      lng: 32.639261,
+      lat: 47.788968,
+      lng: 37.275219,
     },
     confidence: 0.9265857601165771,
     videoUrl: "/videos/Screen Recording 2024-11-24 at 14.05.52.mp4",
